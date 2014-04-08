@@ -10,13 +10,12 @@ class Play21 < Formula
   conflicts_with 'play', :because => 'both install `play` binaries'
 
   def install
-    system "./framework/build", "publish-local" if build.head?
-
-    # remove Windows .bat files
-    rm Dir['*.bat']
-    rm Dir["#{buildpath}/**/*.bat"] if build.head?
-
+    rm Dir['*.bat'] # remove windows' bat files
     libexec.install Dir['*']
-    bin.install_symlink libexec/'play'
+    inreplace libexec+"play" do |s|
+      s.gsub! "$dir/", "$dir/../libexec/"
+      s.gsub! "dir=`dirname $PRG`", "dir=`dirname $0` && dir=$dir/`dirname $PRG`"
+    end
+    bin.install_symlink libexec+'play'
   end
 end
