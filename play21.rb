@@ -7,7 +7,7 @@ class Play21 < Formula
   sha1 '3b1a0c3ca23dde36113d935b85d7f4d45f05923b'
 
   conflicts_with 'sox', :because => 'both install `play` binaries'
-  conflicts_with 'play', :because => 'both install `play` binaries'
+#  conflicts_with 'play', :because => 'both install `play` binaries'
 
   def install
     rm Dir['*.bat'] # remove windows' bat files
